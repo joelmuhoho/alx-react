@@ -1,4 +1,5 @@
 import logo from "./alx-logo.jpg";
+import { getFullYear, getFooterCopy } from "./utils";
 
 const App = () => {
   return (
@@ -11,7 +12,9 @@ const App = () => {
         <p>Login to access the full dashboard</p>
       </div>
       <div className="App-footer">
-        <p>Copyright 2020 - ALX</p>
+        <p>
+          Copyright {getFullYear()} - {getFooterCopy(true)}
+        </p>
       </div>
     </>
   );
