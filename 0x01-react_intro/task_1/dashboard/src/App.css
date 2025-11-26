@@ -1,0 +1,22 @@
+.App-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #e0354b;
+  border-bottom: 5px solid #e0354b;
+}
+.App-logo {
+  height: 100px;
+  width: 100px;
+}
+.App-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+  border-bottom: 5px solid #e0354b;
+}
+
+.App-footer {
+  text-align: center;
+  font-style: italic;
+}
