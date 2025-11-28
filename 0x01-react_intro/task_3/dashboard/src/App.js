@@ -4,11 +4,11 @@ import { getFullYear, getFooterCopy } from "./utils";
 const App = () => {
   return (
     <>
-      <div className="App-header">
+      <header className="App-header">
         <img className="App-logo" src={logo} alt="alx holberton logo" />
         <h1>School dashboard</h1>
-      </div>
-      <div className="App-body">
+      </header>
+      <main className="App-body">
         <p>Login to access the full dashboard</p>
         <label htmlFor="email">Email</label>
         <input
@@ -25,12 +25,12 @@ const App = () => {
           placeholder="enter your password"
         />
         <button>OK</button>
-      </div>
-      <div className="App-footer">
+      </main>
+      <footer className="App-footer">
         <p>
           Copyright {getFullYear()} - {getFooterCopy(true)}
         </p>
-      </div>
+      </footer>
     </>
   );
 };
