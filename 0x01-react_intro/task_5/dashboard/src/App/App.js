@@ -1,5 +1,5 @@
-import logo from "./alx-logo.jpg";
-import { getFullYear, getFooterCopy } from "./utils";
+import logo from "../assets/alx-logo.jpg";
+import { getFullYear, getFooterCopy } from "../utils/utils";
 
 const App = () => {
   return (
