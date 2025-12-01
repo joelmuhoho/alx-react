@@ -13,17 +13,17 @@ const Notification = () => {
       <p>Here is the list of notifications</p>
       <ul>
         <NotificationItem
-          type="Priority-default"
+          type="default"
           html={{ __html: "New course available" }}
           value=""
         />
         <NotificationItem
-          type="Priority-urgent"
+          type="urgent"
           html={{ __html: "New resume available" }}
           value=""
         />
         <NotificationItem
-          type="Priority-urgent"
+          type="urgent"
           html={{ __html: getLatestNotification() }}
           value=""
         />

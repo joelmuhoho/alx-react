@@ -4,10 +4,3 @@
   min-height: 70vh;
   border-bottom: 5px solid #e0354b;
 }
-
-[data="Priority-default"] {
-  color: blue;
-}
-[data="Priority-urgent"] {
-  color: #e0354b;
-}

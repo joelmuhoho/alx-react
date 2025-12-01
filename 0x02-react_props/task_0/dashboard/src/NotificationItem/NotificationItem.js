@@ -1,3 +1,4 @@
+import "./NotificationItem.css";
 const NotificationItem = (props) => {
   const { type, html, value } = props;
   return (
