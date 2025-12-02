@@ -1,0 +1,8 @@
+th {
+  text-align: left;
+  border-bottom: 1.5px solid rgb(70, 66, 66);
+}
+
+th[colspan="2"] {
+  text-align: center;
+}

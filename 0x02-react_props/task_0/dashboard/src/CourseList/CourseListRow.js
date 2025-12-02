@@ -1,5 +1,5 @@
-import propTypes from "prop-types";
-
+import PropTypes from "prop-types";
+import "./CourseListRow.css";
 const CourseListRow = (props) => {
   const isHeader = props.isHeader ? props.isHeader : false;
   const textFirstCell = props.textFirstCell;
@@ -27,9 +27,9 @@ const CourseListRow = (props) => {
 };
 
 CourseListRow.prototype = {
-  isHeader: propTypes.bool,
-  textFirstCell: propTypes.string.isRequired,
-  textSecondCell: propTypes.string,
+  isHeader: PropTypes.bool,
+  textFirstCell: PropTypes.string.isRequired,
+  textSecondCell: PropTypes.string,
 };
 
 export default CourseListRow;
