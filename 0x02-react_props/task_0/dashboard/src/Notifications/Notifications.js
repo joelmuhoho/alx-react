@@ -1,11 +1,11 @@
 import React from "react";
 import "./Notifications.css";
-import { getLatestNotification } from "../utils/utils";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import PropTypes from "prop-types";
+import NotificationItemShape from "../NotificationItem/NotificationItemShape";
 // import closeIcon from "./close-icon.png";
 
-const Notification = ({ displayDrawer = false }) => {
+const Notification = ({ displayDrawer = false, listNotifications = [] }) => {
   function buttonClicked() {
     console.log("Close button has been clicked");
   }
@@ -16,24 +16,25 @@ const Notification = ({ displayDrawer = false }) => {
       </div>
       {displayDrawer ? (
         <div className="Notifications">
-          <p>Here is the list of notifications</p>
-          <ul>
-            <NotificationItem
-              type="default"
-              html={{ __html: "New course available" }}
-              value=""
-            />
-            <NotificationItem
-              type="urgent"
-              html={{ __html: "New resume available" }}
-              value=""
-            />
-            <NotificationItem
-              type="urgent"
-              html={{ __html: getLatestNotification() }}
-              value=""
-            />
-          </ul>
+          {listNotifications.length === 0 ? (
+            <p>No new notification for now</p>
+          ) : (
+            <>
+              <p>Here is the list of notifications</p>
+              <ul>
+                {listNotifications.map((notification) => {
+                  return (
+                    <NotificationItem
+                      key={notification.id}
+                      type={notification.type}
+                      html={notification.html}
+                      value={notification.value}
+                    />
+                  );
+                })}
+              </ul>
+            </>
+          )}
           <button
             style={{ align: "right", ariaLabel: "Close" }}
             onClick={buttonClicked}
@@ -50,5 +51,6 @@ const Notification = ({ displayDrawer = false }) => {
 };
 Notification.prototype = {
   displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 export default Notification;
