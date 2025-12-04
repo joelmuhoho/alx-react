@@ -5,6 +5,8 @@ import Footer from "../Footer/Footer";
 import CourseList from "../CourseList/CourseList";
 import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
+import { Component } from "react";
+import "./App.css";
 
 const listCourses = [
   { id: 1, name: "ES6", credit: 60 },
@@ -31,22 +33,31 @@ const listNotifications = [
     value: "",
   },
 ];
-const App = ({ isLoggedIn = false }) => {
-  return (
-    <>
-      <Notifications
-        displayDrawer={false}
-        listNotifications={listNotifications}
-      />
-      <div className="App">
-        <Header />
-        <main className="App-body">
-          {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
-        </main>
-        <Footer />
-      </div>
-    </>
-  );
+class App extends Component {
+  render() {
+    return (
+      <>
+        <Notifications
+          displayDrawer={false}
+          listNotifications={listNotifications}
+        />
+        <div className="App">
+          <Header />
+          <main className="App-body">
+            {this.props.isLoggedIn ? (
+              <CourseList listCourses={listCourses} />
+            ) : (
+              <Login />
+            )}
+          </main>
+          <Footer />
+        </div>
+      </>
+    );
+  }
+}
+App.defaultProps = {
+  isLoggedIn: false,
 };
 
 App.propTypes = { isLoggedIn: PropTypes.bool };
