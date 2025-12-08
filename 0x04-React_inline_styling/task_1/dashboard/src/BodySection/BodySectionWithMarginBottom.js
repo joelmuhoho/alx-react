@@ -1,9 +1,15 @@
 import ProtoTypes from "prop-types";
 import BodySection from "./BodySection";
-import "./BodySectionWithMarginBottom.css";
+import { StyleSheet, css } from "aphrodite";
+
+const styles = StyleSheet.create({
+  margin: {
+    marginBottom: "40px",
+  },
+});
 const BodySectionWithMarginBottom = (props) => {
   return (
-    <div className="bodySectionWithMargin">
+    <div className={css(styles.margin)}>
       <BodySection {...props} />
     </div>
   );

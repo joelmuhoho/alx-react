@@ -1,8 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("BodySectionWithMarginBottom", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     render(
       <BodySectionWithMarginBottom title="test">
