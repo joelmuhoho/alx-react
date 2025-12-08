@@ -2,8 +2,17 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("App", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     render(<App />);
   });
@@ -44,11 +53,13 @@ describe("App when isLoggedIn is true", () => {
   let alertSpy;
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     alertSpy = jest.spyOn(window, "alert").mockImplementation(() => {});
   });
 
   afterEach(() => {
     alertSpy.mockRestore();
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
   it("renders CourseList component with a table element", () => {
