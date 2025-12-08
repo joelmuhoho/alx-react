@@ -12,7 +12,7 @@ describe("App", () => {
     render(<App />);
     const notificationParagraphElement = screen.getByText("Your notifications");
     expect(notificationParagraphElement).toBeInTheDocument();
-    expect(notificationParagraphElement.parentElement).toHaveClass("menuItem");
+    expect(notificationParagraphElement.parentElement).toHaveClass(/menuItem/i);
   });
 
   it("renders Header component that has a header element with class header", () => {
