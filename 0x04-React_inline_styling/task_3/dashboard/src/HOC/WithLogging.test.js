@@ -31,10 +31,10 @@ describe("WithLogging", () => {
     const WrappedLogin = WithLogging(Login);
 
     const { unmount } = render(<WrappedLogin />);
-    const emailLabelElement = screen.getByLabelText("Email");
+    const emailLabelElement = screen.getByLabelText(/Email/i);
     const emailInputElement = screen.getByRole("textbox", { name: /email/i });
-    const pwdLabelElement = screen.getByLabelText("Password");
-    const pwdInputElement = screen.getByLabelText("Password");
+    const pwdLabelElement = screen.getByLabelText(/Password/i);
+    const pwdInputElement = screen.getByLabelText(/Password/i);
 
     expect(emailLabelElement).toBeInTheDocument();
     expect(emailInputElement).toBeInTheDocument();
