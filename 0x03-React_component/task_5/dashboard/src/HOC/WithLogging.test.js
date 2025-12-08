@@ -14,6 +14,7 @@ describe("WithLogging", () => {
     expect(console.log).toHaveBeenCalledWith(
       "Component SimpleComponent is mounted"
     );
+    console.log.mockClear();
   });
 
   it("renders and console.log is called on mount and unmount with Login component being wrapped", () => {
@@ -36,5 +37,7 @@ describe("WithLogging", () => {
     expect(console.log).toHaveBeenCalledWith(
       "Component Login is going to unmount"
     );
+
+    console.log.mockClear();
   });
 });
