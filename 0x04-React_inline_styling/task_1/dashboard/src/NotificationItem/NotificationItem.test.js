@@ -2,8 +2,17 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import NotificationItem from "./NotificationItem";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("NotificationItem", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     render(<NotificationItem />);
   });

@@ -1,10 +1,18 @@
-import "./NotificationItem.css";
 import PropTypes from "prop-types";
 import { PureComponent } from "react";
+import { StyleSheet, css } from "aphrodite";
+
+const styles = StyleSheet.create({
+  default: { color: "blue" },
+  urgent: { color: "#e0354b" },
+});
 class NotificationItem extends PureComponent {
   render() {
     return (
       <li
+        className={css(
+          this.props.type === "default" ? styles.default : styles.urgent
+        )}
         data-notification-type={this.props.type}
         value={this.props.value}
         dangerouslySetInnerHTML={this.props.html}
