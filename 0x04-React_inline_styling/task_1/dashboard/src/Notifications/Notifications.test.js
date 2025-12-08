@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Notifications from "./Notifications";
+import { StyleSheetTestUtils } from "aphrodite";
 
 const listNotifications = [
   {
@@ -17,6 +18,14 @@ const listNotifications = [
   },
 ];
 describe("Notifications", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("Notification renders without crashing", () => {
     render(<Notifications />);
   });
