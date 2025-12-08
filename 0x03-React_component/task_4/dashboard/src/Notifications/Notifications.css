@@ -1,0 +1,18 @@
+.Notifications {
+  position: absolute;
+  right: 10px;
+  border: 1.5px dotted red;
+  padding: 2px;
+}
+.Notifications-close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+.menuItem {
+  text-align: right;
+}
