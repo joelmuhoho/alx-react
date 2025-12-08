@@ -2,8 +2,17 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import WithLogging from "./WithLogging";
 import Login from "../Login/Login";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("WithLogging", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders and console.log is called on mount and on unmount with Component when the wrapped element is pure html", () => {
     console.log = jest.fn();
     const SimpleComponent = () => <div>Simple Component</div>;
