@@ -80,7 +80,7 @@ describe("Notifications", () => {
     render(<Notifications />); // displayDrawer prop is false by default
     const menuElement = screen.getByRole("paragraph");
     expect(menuElement).toBeInTheDocument();
-    expect(menuElement.parentElement).toHaveClass("menuItem");
+    expect(menuElement.parentElement).toHaveClass(/menuItem/i);
   });
 
   it("does not renders a div with class Notifications when property displayDrawer is false", () => {
@@ -93,7 +93,7 @@ describe("Notifications", () => {
     render(<Notifications displayDrawer={true} />);
     const menuElement = screen.getByText("Your notifications");
     expect(menuElement).toBeInTheDocument();
-    expect(menuElement.parentElement).toHaveClass("menuItem");
+    expect(menuElement.parentElement).toHaveClass(/menuItem/i);
   });
 
   it("renders a div with class Notifications when property displayDrawer is true and listNotifications is not empty", () => {
@@ -105,7 +105,7 @@ describe("Notifications", () => {
     );
     const menuElement = screen.queryByText("Here is the list of notifications");
     expect(menuElement).toBeInTheDocument();
-    expect(menuElement.parentElement).toHaveClass("Notifications");
+    expect(menuElement.parentElement).toHaveClass(/Notifications/i);
   });
 
   it("renders correctly if listNotifications array is not passed", () => {
