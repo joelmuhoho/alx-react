@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import "./CourseListRow.css";
+const headerRowColor = "#deb5b545";
+const rowColor = "#f5f5f5ab";
 const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
   return (
-    <tr>
+    <tr style={{ backgroundColor: isHeader ? headerRowColor : rowColor }}>
       {isHeader ? (
         !textSecondCell ? (
           <th colSpan={2}>{textFirstCell}</th>
