@@ -1,17 +1,29 @@
 import PropTypes from "prop-types";
-import "./CourseListRow.css";
-const headerRowColor = "#deb5b545";
-const rowColor = "#f5f5f5ab";
+import { StyleSheet, css } from "aphrodite";
+
+const styles = StyleSheet.create({
+  headerRow: { backgroundColor: "#deb5b545" },
+  row: { backgroundColor: "#f5f5f5ab" },
+  th: {
+    textAlign: "left",
+    borderBottom: "1.5px solid rgb(70, 66, 66)",
+  },
+  thColspan2: {
+    textAlign: "center",
+  },
+});
 const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
   return (
-    <tr style={{ backgroundColor: isHeader ? headerRowColor : rowColor }}>
+    <tr className={css(isHeader ? styles.headerRow : styles.row)}>
       {isHeader ? (
         !textSecondCell ? (
-          <th colSpan={2}>{textFirstCell}</th>
+          <th className={css(styles.th, styles.thColspan2)} colSpan={2}>
+            {textFirstCell}
+          </th>
         ) : (
           <>
-            <th>{textFirstCell}</th>
-            <th>{textSecondCell}</th>
+            <th className={css(styles.th)}>{textFirstCell}</th>
+            <th className={css(styles.th)}>{textSecondCell}</th>
           </>
         )
       ) : (

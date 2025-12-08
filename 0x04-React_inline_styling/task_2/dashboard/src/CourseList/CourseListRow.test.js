@@ -1,11 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CourseListRow from "./CourseListRow";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("CourseListRow", () => {
   let customContainer;
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+
     const table = document.createElement("table");
     const tableBody = document.createElement("tbody");
     table.appendChild(tableBody);
@@ -14,6 +17,8 @@ describe("CourseListRow", () => {
   });
 
   afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+
     if (customContainer && customContainer.parentNode) {
       customContainer.parentNode.parentNode.removeChild(
         customContainer.parentNode
@@ -21,6 +26,7 @@ describe("CourseListRow", () => {
     }
     customContainer = null;
   });
+
   it("renders one cell with colspan = 2 when textSecondCell does not exist", () => {
     render(<CourseListRow isHeader={true} textFirstCell="header1" />, {
       container: customContainer,
