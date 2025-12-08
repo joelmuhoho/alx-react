@@ -1,7 +1,7 @@
 import "./NotificationItem.css";
 import PropTypes from "prop-types";
-import { Component } from "react";
-class NotificationItem extends Component {
+import { PureComponent } from "react";
+class NotificationItem extends PureComponent {
   render() {
     return (
       <li
