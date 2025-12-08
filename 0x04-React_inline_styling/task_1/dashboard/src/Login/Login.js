@@ -1,4 +1,10 @@
-import "./Login.css";
+import { StyleSheet, css } from "aphrodite";
+
+const styles = StyleSheet.create({
+  margin: {
+    margin: "auto",
+  },
+});
 const Login = () => {
   return (
     <>

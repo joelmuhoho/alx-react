@@ -1,8 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Login from "./Login";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("Login", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     render(<Login />);
   });
