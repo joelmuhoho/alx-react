@@ -2,16 +2,38 @@ import React from "react";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import PropTypes from "prop-types";
 import NotificationItemShape from "../NotificationItem/NotificationItemShape";
-// import closeIcon from "./close-icon.png";
 import { StyleSheet, css } from "aphrodite";
+
+const opacityChange = {
+  from: {
+    opacity: 0.5,
+  },
+  to: {
+    opacity: 1,
+  },
+};
+
+const bounce = {
+  "0%": {
+    transform: "translateY(0px)",
+  },
+  "50%": {
+    transform: "translateY(-5px)",
+  },
+  "100%": {
+    transform: "translateY(5px)",
+  },
+};
 
 const styles = StyleSheet.create({
   Notifications: {
     position: "absolute",
     right: "10px",
-    // border: "1.5px dotted red",
-    // padding: "2px",
     background: "white",
+    fontSize: "16px",
+    cursor: "pointer",
+    align: "right",
+    ariaLabel: "Close",
     "@media (max-width: 900px)": {
       height: "100%",
       width: "100%",
@@ -40,7 +62,19 @@ const styles = StyleSheet.create({
     ariaLabel: "Close",
   },
   menuItem: {
-    textAlign: "right",
+    position: "fixed",
+    right: "0",
+    backgroundColor: "#fff8f8",
+    cursor: "pointer",
+    float: "right",
+    ":hover": {
+      animationName: [opacityChange, bounce],
+      animationDuration: "1s, 0.5s",
+      animationIterationCount: "3",
+    },
+  },
+  hide: {
+    display: "none",
   },
 });
 
@@ -63,7 +97,12 @@ class Notification extends React.Component {
   render() {
     return (
       <>
-        <div className={css(styles.menuItem)}>
+        <div
+          className={css(
+            styles.menuItem,
+            this.props.displayDrawer && styles.hide
+          )}
+        >
           <p>Your notifications</p>
         </div>
         {this.props.displayDrawer ? (
