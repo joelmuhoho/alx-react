@@ -15,11 +15,11 @@ describe("App", () => {
     expect(notificationParagraphElement.parentElement).toHaveClass("menuItem");
   });
 
-  it("renders Header component that has a header element with class App-header", () => {
+  it("renders Header component that has a header element with class header", () => {
     render(<App />);
     const headerElement = screen.getByRole("banner");
     expect(headerElement).toBeInTheDocument();
-    expect(headerElement).toHaveClass("App-header");
+    expect(headerElement).toHaveClass(/header/i);
   });
 
   it("renders Login component with a paragraph 'Login to access the full dashboard' text ", () => {
@@ -35,7 +35,7 @@ describe("App", () => {
 
     const footerElement = screen.getByRole("contentinfo");
     expect(footerElement).toBeInTheDocument();
-    expect(footerElement).toHaveClass("App-footer");
+    expect(footerElement).toHaveClass(/footer/i);
   });
 });
 

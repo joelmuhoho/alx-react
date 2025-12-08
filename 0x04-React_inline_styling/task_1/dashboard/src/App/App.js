@@ -8,8 +8,18 @@ import { getLatestNotification } from "../utils/utils";
 import { Component } from "react";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
-import "./App.css";
+import { StyleSheet, css } from "aphrodite";
 
+const styles = StyleSheet.create({
+  body: {
+    minHeight: "70vh",
+    borderBottom: "5px solid #e0354b",
+  },
+  footer: {
+    textAlign: "center",
+    fontStyle: "italic",
+  },
+});
 const listCourses = [
   { id: 1, name: "ES6", credit: 60 },
   { id: 2, name: "Webpack", credit: 20 },
