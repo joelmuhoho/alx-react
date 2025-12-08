@@ -1,8 +1,17 @@
 import Header from "./Header";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("Header", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     render(<Header />);
   });
