@@ -1,11 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CourseList from "./CourseList";
+import { StyleSheetTestUtils } from "aphrodite";
 const listCourses = [
   { id: 1, name: "ES6", credit: 60 },
   { id: 2, name: "Webpack", credit: 20 },
 ];
 describe("CourseList", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it("renders without crashing", () => {
     render(<CourseList />);
   });
