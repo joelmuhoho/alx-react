@@ -9,8 +9,24 @@ const styles = StyleSheet.create({
   Notifications: {
     position: "absolute",
     right: "10px",
-    border: "1.5px dotted red",
-    padding: "2px",
+    // border: "1.5px dotted red",
+    // padding: "2px",
+    background: "white",
+    "@media (max-width: 900px)": {
+      height: "100%",
+      width: "100%",
+      fontSize: "20px",
+    },
+  },
+  ul: {
+    "@media (max-width: 900px)": {
+      padding: "0 0 0 5px",
+    },
+  },
+  p: {
+    "@media (max-width: 900px)": {
+      padding: "0 0 0 10px",
+    },
   },
   NotificationsCloseButton: {
     position: "absolute",
@@ -56,8 +72,10 @@ class Notification extends React.Component {
               <p>No new notification for now</p>
             ) : (
               <>
-                <p>Here is the list of notifications</p>
-                <ul>
+                <p className={css(styles.p)}>
+                  Here is the list of notifications
+                </p>
+                <ul className={css(styles.ul)}>
                   {this.props.listNotifications.map((notification) => {
                     return (
                       <NotificationItem
