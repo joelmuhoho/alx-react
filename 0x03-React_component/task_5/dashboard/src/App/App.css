@@ -1,0 +1,6 @@
+.App-body {
+  /* display: flex; */
+  /* flex-direction: column; */
+  min-height: 70vh;
+  border-bottom: 5px solid #e0354b;
+}
