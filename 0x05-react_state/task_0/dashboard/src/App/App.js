@@ -46,6 +46,18 @@ const listNotifications = [
   },
 ];
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayDrawer: false,
+    };
+  }
+  handleDisplayDrawer = () => {
+    this.setState({ displayDrawer: true });
+  };
+  handleHideDrawer = () => {
+    this.setState({ displayDrawer: false });
+  };
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
   }
@@ -65,7 +77,9 @@ class App extends Component {
     return (
       <>
         <Notifications
-          displayDrawer={false}
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
           listNotifications={listNotifications}
         />
         <div className="App">
