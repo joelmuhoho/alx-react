@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
@@ -82,5 +82,55 @@ describe("App when isLoggedIn is true", () => {
     const user = userEvent.setup();
     await user.keyboard("{Control>}h{/Control}");
     expect(window.alert).toHaveBeenCalledWith("Logging you out");
+  });
+});
+
+describe("App displayDrawer state", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
+  it("should render with default value of displayDrawer as false", () => {
+    const { container } = render(<App />);
+    const notificationsComponent = container.querySelector("Notifications");
+    expect(notificationsComponent).not.toBeInTheDocument;
+  });
+
+  it("should update displayDrawer to true after calling handleDisplayDrawer", () => {
+    const { container, rerender } = render(<App />);
+
+    // First, open it handleDisplayDrawer is called here on click
+    const menuItem = screen.getByText("Your notifications");
+    fireEvent.click(menuItem); // handleDisplayDrawer is called
+    rerender(<App />);
+
+    // Then, close it
+    const closeButton = screen.getByText("X");
+    fireEvent.click(closeButton);
+    rerender(<App />);
+
+    const notifications = container.querySelector(".Notifications");
+    expect(notifications).toBeNull();
+  });
+
+  it("should update displayDrawer to false after calling handleHideDrawer", () => {
+    const { container, rerender } = render(<App />);
+
+    // First, open it
+    const menuItem = screen.getByText("Your notifications");
+    fireEvent.click(menuItem);
+    rerender(<App />);
+
+    // Then, close it handleHideDrawer is called on click
+    const closeButton = screen.getByText("X");
+    fireEvent.click(closeButton); // handleHideDrawer is called here
+    rerender(<App />);
+
+    const notifications = container.querySelector(".Notifications");
+    expect(notifications).toBeNull();
   });
 });
