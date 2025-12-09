@@ -84,12 +84,15 @@ class Notification extends React.Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
   shouldComponentUpdate(nextProps) {
-    return (
+    if (
       nextProps.listNotifications.length !== this.props.listNotifications.length
-    );
-  }
-  buttonClicked() {
-    console.log("Close button has been clicked");
+    ) {
+      return true;
+    }
+    if (nextProps.displayDrawer !== this.props.displayDrawer) {
+      return true;
+    }
+    return false;
   }
   markAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
@@ -103,7 +106,13 @@ class Notification extends React.Component {
             this.props.displayDrawer && styles.hide
           )}
         >
-          <p>Your notifications</p>
+          <p
+            onClick={() => {
+              this.props.handleDisplayDrawer();
+            }}
+          >
+            Your notifications
+          </p>
         </div>
         {this.props.displayDrawer ? (
           <div className={css(styles.Notifications)}>
@@ -131,7 +140,9 @@ class Notification extends React.Component {
               </>
             )}
             <button
-              onClick={this.buttonClicked}
+              onClick={() => {
+                this.props.handleHideDrawer();
+              }}
               className={css(styles.NotificationsCloseButton)}
             >
               {/* <img src={closeIcon} alt="close icon"/> */}X
@@ -146,10 +157,14 @@ class Notification extends React.Component {
 }
 Notification.defaultProps = {
   displayDrawer: false,
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
   listNotifications: [],
 };
 Notification.protoType = {
   displayDrawer: PropTypes.bool,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 export default Notification;
