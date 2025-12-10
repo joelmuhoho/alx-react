@@ -18,9 +18,6 @@ const styles = StyleSheet.create({
 });
 class Header extends Component {
   static contextType = AppContext;
-  constructor(props, context) {
-    super(props, context);
-  }
   render() {
     return (
       <>
@@ -35,7 +32,7 @@ class Header extends Component {
         {this.context.user.isLoggedIn ? (
           <section id="logoutSection">
             Welcome {this.context.user.email}
-            <a onClick={this.context.logOut}>(logout)</a>
+            <button onClick={this.context.logOut}>LogOut</button>
           </section>
         ) : (
           ""
