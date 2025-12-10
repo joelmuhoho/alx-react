@@ -1,0 +1,27 @@
+import Header from "./Header";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { StyleSheetTestUtils } from "aphrodite";
+
+describe("Header", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
+  it("renders without crashing", () => {
+    render(<Header />);
+  });
+
+  it("renders an img and h1 tags", () => {
+    render(<Header />);
+    const imgElement = screen.getByRole("img");
+    const h1Element = screen.getByRole("heading");
+
+    expect(imgElement).toBeInTheDocument();
+    expect(h1Element).toBeInTheDocument();
+  });
+});
