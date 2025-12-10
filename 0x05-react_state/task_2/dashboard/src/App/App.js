@@ -3,12 +3,12 @@ import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import CourseList from "../CourseList/CourseList";
-import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 import { Component } from "react";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
 import { StyleSheet } from "aphrodite";
+import { AppContext } from "./AppContext";
 
 const styles = StyleSheet.create({
   body: {
@@ -46,10 +46,13 @@ const listNotifications = [
   },
 ];
 class App extends Component {
-  constructor(props) {
-    super(props);
+  static contextType = AppContext;
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       displayDrawer: false,
+      user: this.context.user,
+      logOut: this.context.logOut,
     };
   }
   handleDisplayDrawer = () => {
@@ -72,59 +75,74 @@ class App extends Component {
       this.props.logOut();
     }
   };
+  logIn = (email, password) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        email: email,
+        password: password,
+        isLoggedIn: true,
+      },
+      logOut: () => {
+        this.setState({
+          user: {
+            ...this.state.user,
+            email: "",
+            password: "",
+            isLoggedIn: false,
+          },
+        });
+      },
+    });
+  };
 
   render() {
     return (
       <>
-        <Notifications
-          displayDrawer={this.state.displayDrawer}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-          listNotifications={listNotifications}
-        />
-        <div className="App">
-          <Header />
-          <main className="App-body">
-            {this.props.isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList listCourses={listCourses} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login />
-                <BodySection title="News from the School">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur vulputate auctor tellus. Quisque velit massa,
-                    luctus ac augue quis, aliquam imperdiet diam. Nulla
-                    facilisi. Donec eget quam vel nisi consectetur congue in
-                    porttitor risus. Curabitur id massa dignissim, venenatis
-                    quam et, eleifend dui. Morbi id metus felis. Fusce ut massa
-                    eu justo molestie luctus ut quis lacus. Donec id luctus
-                    augue. Nam eleifend mauris eget ultricies ultricies. Fusce
-                    gravida auctor turpis, et efficitur mauris. Aliquam
-                    facilisis ac felis eu condimentum. Vivamus fermentum
-                    sollicitudin lacus in venenatis. Nulla auctor nibh eget ante
-                    consectetur efficitur.
-                  </p>
-                </BodySection>
-              </BodySectionWithMarginBottom>
-            )}
-          </main>
-          <Footer />
-        </div>
+        <AppContext.Provider
+          value={{ user: this.state.user, logOut: this.state.logOut }}
+        >
+          <Notifications
+            displayDrawer={this.state.displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+            listNotifications={listNotifications}
+          />
+          <div className="App">
+            <Header />
+            <main className="App-body">
+              {this.state.user.isLoggedIn ? (
+                <BodySectionWithMarginBottom title="Course list">
+                  <CourseList listCourses={listCourses} />
+                </BodySectionWithMarginBottom>
+              ) : (
+                <BodySectionWithMarginBottom title="Log in to continue">
+                  <Login logIn={this.logIn} />
+                  <BodySection title="News from the School">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Curabitur vulputate auctor tellus. Quisque velit massa,
+                      luctus ac augue quis, aliquam imperdiet diam. Nulla
+                      facilisi. Donec eget quam vel nisi consectetur congue in
+                      porttitor risus. Curabitur id massa dignissim, venenatis
+                      quam et, eleifend dui. Morbi id metus felis. Fusce ut
+                      massa eu justo molestie luctus ut quis lacus. Donec id
+                      luctus augue. Nam eleifend mauris eget ultricies
+                      ultricies. Fusce gravida auctor turpis, et efficitur
+                      mauris. Aliquam facilisis ac felis eu condimentum. Vivamus
+                      fermentum sollicitudin lacus in venenatis. Nulla auctor
+                      nibh eget ante consectetur efficitur.
+                    </p>
+                  </BodySection>
+                </BodySectionWithMarginBottom>
+              )}
+            </main>
+            <Footer />
+          </div>
+        </AppContext.Provider>
       </>
     );
   }
 }
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => {},
-};
-
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func,
-};
 
 export default App;
