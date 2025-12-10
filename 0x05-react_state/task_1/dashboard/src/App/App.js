@@ -8,7 +8,7 @@ import { getLatestNotification } from "../utils/utils";
 import { Component } from "react";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
-import { StyleSheet, css } from "aphrodite";
+import { StyleSheet } from "aphrodite";
 
 const styles = StyleSheet.create({
   body: {
