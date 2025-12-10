@@ -1,5 +1,7 @@
 import logo from "../assets/alx-logo.jpg";
 import { StyleSheet, css } from "aphrodite";
+import { AppContext } from "../App/AppContext";
+import { Component } from "react";
 
 const styles = StyleSheet.create({
   logo: {
@@ -14,12 +16,32 @@ const styles = StyleSheet.create({
     borderBottom: "5px solid #e0354b",
   },
 });
-const Header = () => {
-  return (
-    <header className={css(styles.header)}>
-      <img className={css(styles.logo)} src={logo} alt="alx holberton logo" />
-      <h1>School dashboard</h1>
-    </header>
-  );
-};
+class Header extends Component {
+  static contextType = AppContext;
+  constructor(props, context) {
+    super(props, context);
+  }
+  render() {
+    return (
+      <>
+        <header className={css(styles.header)}>
+          <img
+            className={css(styles.logo)}
+            src={logo}
+            alt="alx holberton logo"
+          />
+          <h1>School dashboard</h1>
+        </header>
+        {this.context.user.isLoggedIn ? (
+          <section id="logoutSection">
+            Welcome {this.context.user.email}
+            <a onClick={this.context.logOut}>(logout)</a>
+          </section>
+        ) : (
+          ""
+        )}
+      </>
+    );
+  }
+}
 export default Header;
