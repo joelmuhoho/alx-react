@@ -53,6 +53,7 @@ class App extends Component {
       displayDrawer: false,
       user: this.context.user,
       logOut: this.context.logOut,
+      listNotifications: listNotifications,
     };
   }
   handleDisplayDrawer = () => {
@@ -97,6 +98,15 @@ class App extends Component {
       },
     });
   };
+  markNotificationAsRead = (id) => {
+    this.setState({
+      listNotifications: this.state.listNotifications.filter((notification) => {
+        if (notification.id !== id) {
+          return notification;
+        }
+      }),
+    });
+  };
 
   render() {
     return (
@@ -108,7 +118,8 @@ class App extends Component {
             displayDrawer={this.state.displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
-            listNotifications={listNotifications}
+            listNotifications={this.state.listNotifications}
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className="App">
             <Header />
