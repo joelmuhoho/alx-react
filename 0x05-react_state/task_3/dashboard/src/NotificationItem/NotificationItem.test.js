@@ -1,6 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
 import NotificationItem from "./NotificationItem";
 import { StyleSheetTestUtils } from "aphrodite";
 
@@ -49,13 +48,54 @@ describe("NotificationItem", () => {
     expect(listItemElement).toHaveTextContent("test");
   });
 
-  it("make sure NotificationItem component when clicked it calls markAsRead property with right ID", async () => {
-    const notificationId = 7;
-    const markAsReadSpy = jest.fn(); // Mock function
-    render(<NotificationItem markAsRead={markAsReadSpy} id={notificationId} />);
-    const user = userEvent.setup();
-    const notification = screen.getByRole("listitem");
-    await user.click(notification); // Simulate click event
-    expect(markAsReadSpy).toHaveBeenCalledWith(notificationId);
+  it("make sure NotificationItem component when clicked it calls markNotificationAsRead property with right ID", async () => {
+    const testNotification = {
+      id: 7,
+      type: "urgent",
+      html: { __html: "New course available" },
+      value: "",
+    };
+    const markNotificationAsRead = jest.fn(); // Mock function
+    render(
+      <NotificationItem
+        markNotificationAsRead={markNotificationAsRead}
+        id={testNotification.id}
+        type={testNotification.type}
+        html={testNotification.html}
+        value={testNotification.value}
+      />
+    );
+    const notification = screen.getByText(/New course available/i);
+    expect(notification).toBeInTheDocument();
+
+    fireEvent.click(notification); // Simulate click event
+    expect(markNotificationAsRead).toHaveBeenCalledWith(testNotification.id);
+  });
+
+  it("make sure NotificationItem component when clicked it calls markNotificationAsRead property with right ID and removed from notifications", async () => {
+    const testNotification = {
+      id: 7,
+      type: "urgent",
+      html: { __html: "New course available" },
+      value: "",
+    };
+    const markNotificationAsRead = jest.fn(); // Mock function
+    const { rerender } = render(
+      <NotificationItem
+        markNotificationAsRead={markNotificationAsRead}
+        id={testNotification.id}
+        type={testNotification.type}
+        html={testNotification.html}
+        value={testNotification.value}
+      />
+    );
+    const notification = screen.getByText(/New course available/i);
+    fireEvent.click(notification); // Simulate click event
+    expect(markNotificationAsRead).toHaveBeenCalledWith(testNotification.id);
+    expect(notification).toBeInTheDocument();
+
+    rerender(<NotificationItem />);
+    const removedNotification = screen.queryByText(/New course available/i);
+    expect(removedNotification).toBe(null);
   });
 });
