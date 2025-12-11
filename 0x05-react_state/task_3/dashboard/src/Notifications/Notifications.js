@@ -78,24 +78,9 @@ const styles = StyleSheet.create({
   },
 });
 
-class Notification extends React.Component {
+class Notification extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-  shouldComponentUpdate(nextProps) {
-    if (
-      nextProps.listNotifications.length !== this.props.listNotifications.length
-    ) {
-      return true;
-    }
-    if (nextProps.displayDrawer !== this.props.displayDrawer) {
-      return true;
-    }
-    return false;
-  }
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
   }
   render() {
     return (
@@ -132,7 +117,9 @@ class Notification extends React.Component {
                         type={notification.type}
                         html={notification.html}
                         value={notification.value}
-                        markAsRead={this.markAsRead}
+                        markNotificationAsRead={
+                          this.props.markNotificationAsRead
+                        }
                       />
                     );
                   })}
@@ -145,7 +132,7 @@ class Notification extends React.Component {
               }}
               className={css(styles.NotificationsCloseButton)}
             >
-              {/* <img src={closeIcon} alt="close icon"/> */}X
+              X
             </button>
           </div>
         ) : (
@@ -160,11 +147,13 @@ Notification.defaultProps = {
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
   listNotifications: [],
+  markNotificationAsRead: (id) => {},
 };
 Notification.protoType = {
   displayDrawer: PropTypes.bool,
   handleDisplayDrawer: PropTypes.func,
   handleHideDrawer: PropTypes.func,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  markNotificationAsRead: PropTypes.func,
 };
 export default Notification;
