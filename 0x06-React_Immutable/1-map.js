@@ -5,6 +5,6 @@ import { Map } from "./node_modules/immutable/dist/immutable.js";
  * @param {Object} object - an object to be converted into an immutable object
  * @returns {Object} - an immutable object
  */
-export const getImmutableObject = (object) => {
+export default function getImmutableObject(object) {
   return Map(object);
-};
+}
