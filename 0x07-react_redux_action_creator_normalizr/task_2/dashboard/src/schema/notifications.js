@@ -17,9 +17,14 @@ const normalizedNotifications = normalize(allNotifications, [notification]);
  */
 const getAllNotificationsByUser = (userId) => {
   let userNotificationContext = [];
-  for (let i = 0; i < allNotifications.length; i++) {
-    if (allNotifications[i].author.id === userId) {
-      userNotificationContext.push(allNotifications[i].context);
+
+  for (const notificationId of normalizedNotifications.result) {
+    const notification =
+      normalizedNotifications.entities.notifications[notificationId];
+    if (notification.author === userId) {
+      const message =
+        normalizedNotifications.entities.messages[notification.context];
+      userNotificationContext.push(message);
     }
   }
   return userNotificationContext;
