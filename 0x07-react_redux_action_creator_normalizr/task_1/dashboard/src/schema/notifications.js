@@ -1,4 +1,14 @@
 import allNotifications from "../../notifications";
+import { schema, normalize } from "normalizr";
+
+const user = new schema.Entity("users");
+const message = new schema.Entity("messages", {}, { idAttribute: "guid" });
+const notification = new schema.Entity("notifications", {
+  author: user,
+  context: message,
+});
+
+const normalizedNotifications = normalize(allNotifications, [notification]);
 
 /**
  * Retrieves all the notifications for a given user
@@ -15,4 +25,4 @@ const getAllNotificationsByUser = (userId) => {
   return userNotificationContext;
 };
 
-export default getAllNotificationsByUser;
+export { getAllNotificationsByUser, normalizedNotifications };
