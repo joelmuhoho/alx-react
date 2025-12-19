@@ -1,8 +1,9 @@
 import { selectCourse, unSelectCourse } from "./courseActionCreators";
+import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
 
 describe("selectCourse", () => {
-  it("Should return expected object with correct type and index as it was called with", () => {
-    const expectedResults = { type: "SELECT_COURSE", index: 1 };
+  it("should return the correct action object", () => {
+    const expectedResults = { type: SELECT_COURSE, index: 1 };
 
     const index = 1;
     const result = selectCourse(index);
@@ -11,8 +12,8 @@ describe("selectCourse", () => {
 });
 
 describe("unSelectCourse", () => {
-  it("Should return expected object with correct type and index as it was called with", () => {
-    const expectedResults = { type: "UNSELECT_COURSE", index: 1 };
+  it("should return the correct action object", () => {
+    const expectedResults = { type: UNSELECT_COURSE, index: 1 };
 
     const index = 1;
     const result = unSelectCourse(index);
