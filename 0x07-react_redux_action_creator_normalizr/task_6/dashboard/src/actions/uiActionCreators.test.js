@@ -4,11 +4,17 @@ import {
   displayNotificationDrawer,
   hideNotificationDrawer,
 } from "./uiActionCreators";
+import {
+  LOGIN,
+  LOGOUT,
+  DISPLAY_NOTIFICATION_DRAWER,
+  HIDE_NOTIFICATION_DRAWER,
+} from "./uiActionTypes";
 
 describe("login", () => {
-  it("Should return expected object with correct type and index as it was called with", () => {
+  it("Should return the correct action object when called.", () => {
     const expectedResults = {
-      type: "LOGIN",
+      type: LOGIN,
       user: { user: { email: undefined, password: undefined } },
     };
 
@@ -18,9 +24,9 @@ describe("login", () => {
 });
 
 describe("logout", () => {
-  it("Should return expected object with correct type and index as it was called with", () => {
+  it("Should return the correct action object when called.", () => {
     const expectedResults = {
-      type: "LOGOUT",
+      type: LOGOUT,
     };
 
     const result = logout();
@@ -29,9 +35,9 @@ describe("logout", () => {
 });
 
 describe("displayNotificationDrawer", () => {
-  it("Should return expected object with correct type and index as it was called with", () => {
+  it("Should return the correct action object when called.", () => {
     const expectedResults = {
-      type: "DISPLAY_NOTIFICATION_DRAWER",
+      type: DISPLAY_NOTIFICATION_DRAWER,
     };
 
     const result = displayNotificationDrawer();
@@ -40,9 +46,9 @@ describe("displayNotificationDrawer", () => {
 });
 
 describe("hideNotificationDrawer", () => {
-  it("Should return expected object with correct type and index as it was called with", () => {
+  it("Should return the correct action object when called.", () => {
     const expectedResults = {
-      type: "HIDE_NOTIFICATION_DRAWER",
+      type: HIDE_NOTIFICATION_DRAWER,
     };
 
     const result = hideNotificationDrawer();
