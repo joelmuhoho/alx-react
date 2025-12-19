@@ -3,20 +3,20 @@ import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
 
 describe("selectCourse", () => {
   it("should return the correct action object", () => {
-    const expectedResults = { type: SELECT_COURSE, index: 1 };
+    const expectedAction = { type: SELECT_COURSE, index: 1 };
 
     const index = 1;
-    const result = selectCourse(index);
-    expect(result).toEqual(expectedResults);
+    const action = selectCourse(index);
+    expect(action).toEqual(expectedAction);
   });
 });
 
 describe("unSelectCourse", () => {
   it("should return the correct action object", () => {
-    const expectedResults = { type: UNSELECT_COURSE, index: 1 };
+    const expectedAction = { type: UNSELECT_COURSE, index: 1 };
 
     const index = 1;
-    const result = unSelectCourse(index);
-    expect(result).toEqual(expectedResults);
+    const action = unSelectCourse(index);
+    expect(action).toEqual(expectedAction);
   });
 });

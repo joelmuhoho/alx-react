@@ -14,18 +14,18 @@ describe("markAsRead", () => {
     };
 
     const action = markAsRead(expectedIndex);
-    expect(result).toEqual(expectedAction);
+    expect(action).toEqual(expectedAction);
   });
 });
 
 describe("setNotificationFilter", () => {
   it("Should return correct action object when called", () => {
-    const expectedResults = {
+    const expectedAction = {
       type: SET_TYPE_FILTER,
       filter: NotificationTypeFilters.DEFAULT,
     };
 
-    const result = setNotificationFilter(NotificationTypeFilters.DEFAULT);
-    expect(result).toEqual(expectedResults);
+    const action = setNotificationFilter(NotificationTypeFilters.DEFAULT);
+    expect(action).toEqual(expectedAction);
   });
 });

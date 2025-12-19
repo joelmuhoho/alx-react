@@ -13,45 +13,45 @@ import {
 
 describe("login", () => {
   it("Should return the correct action object when called.", () => {
-    const expectedResults = {
+    const expectedAction = {
       type: LOGIN,
       user: { user: { email: undefined, password: undefined } },
     };
 
-    const result = login();
-    expect(result).toEqual(expectedResults);
+    const action = login();
+    expect(action).toEqual(expectedAction);
   });
 });
 
 describe("logout", () => {
   it("Should return the correct action object when called.", () => {
-    const expectedResults = {
+    const expectedAction = {
       type: LOGOUT,
     };
 
-    const result = logout();
-    expect(result).toEqual(expectedResults);
+    const action = logout();
+    expect(action).toEqual(expectedAction);
   });
 });
 
 describe("displayNotificationDrawer", () => {
   it("Should return the correct action object when called.", () => {
-    const expectedResults = {
+    const expectedAction = {
       type: DISPLAY_NOTIFICATION_DRAWER,
     };
 
-    const result = displayNotificationDrawer();
-    expect(result).toEqual(expectedResults);
+    const action = displayNotificationDrawer();
+    expect(action).toEqual(expectedAction);
   });
 });
 
 describe("hideNotificationDrawer", () => {
   it("Should return the correct action object when called.", () => {
-    const expectedResults = {
+    const expectedAction = {
       type: HIDE_NOTIFICATION_DRAWER,
     };
 
-    const result = hideNotificationDrawer();
-    expect(result).toEqual(expectedResults);
+    const action = hideNotificationDrawer();
+    expect(action).toEqual(expectedAction);
   });
 });
