@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
 } from "./uiActionTypes";
 
-const LOGIN_SUCCESS_URL = "../../dist/login-success.json";
+const LOGIN_URL = "/dist/login-success.json";
 
 /**
  * Action creator to log a user in.
@@ -77,10 +77,11 @@ export const loginRequest = (email, password) => {
     dispatch(login(email, password));
 
     try {
-      const response = await fetch(LOGIN_SUCCESS_URL);
+      const response = await fetch(LOGIN_URL);
 
       if (response.ok) {
         dispatch(loginSuccess());
+        ``;
       } else {
         dispatch(loginFailure());
       }
