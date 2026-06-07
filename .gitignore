@@ -1,3 +1,4 @@
 node_modules/
 main.js
 *.sh
+weekly_journal/*
